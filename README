@@ -1,0 +1,44 @@
+NAME
+	calphotos.py -- Command-line utility to scrape the calphotos website for image links and download them.
+
+SYNOPSIS
+	python calphoto.py [csv file] [dest. folder] [--limit] [--log]
+	Also view this with 'python calphotos.py -h'
+	
+DESCRIPTION
+	CSV is required.  Should be a single column of plant binomials.  
+    Ex.
+		adiantum aleuticum
+		agrostis idahoensis
+		aira caryophyllea
+		arabis glabra
+		artemisia douglasiana
+		asplenium viride
+	
+    Var.'s and ssp.'s may or may not work, though the calphotos search 
+    function seems flexible in this area.
+    
+    If directory does not exist, it will be created.
+    Photos are saved in format 'plant-name0.jpg', 'plant-name1.jpg'... 'plant-name4.jpg'
+
+    (Optional)
+    If images are not found, the binomial will be logged to a csv specified on the command line.
+    
+    The steps required to get the photos:
+    	1.) Plant names are read in from csv and formatted to fit the calphotos search url
+    	2.) This first url goes to the plant image index page
+    	3.) Each thumbnail image is scraped and the link to the larger image is found
+    	4.) The url for each large image is constructed.
+    	5.) Each large image is downloaded and named accordingly.
+
+DEV NOTES
+    http://calphotos.berkeley.edu/cgi-bin/img_query?rel-taxon=begins+with&where-taxon=juncus+effusus
+    http://calphotos.berkeley.edu/cgi/img_query?enlarge=8120+3181+4908+0029
+ 
+    taxon=juncus+effusus
+    replace space with +
+TODO:
+	Check csv for correct format. One column.
+	Better download indicator
+	Merge with pac NW wildflowers scraper.  Let user choose which site to scrape.
+	Handle folder overwriting?
